@@ -8,13 +8,15 @@ Portfolio personal: presentación, sobre mí, proyectos y contacto.
 | --- | --- |
 | Framework | Next.js 16 (App Router) con exportación estática (`output: "export"`) |
 | UI | React 19 + TypeScript |
-| Estilos | CSS plano con variables (tokens de color, espaciado y tipografía) |
-| Tipografías | Instrument Serif, Geist y Geist Mono vía `next/font` (servidas localmente) |
+| Estilos | CSS plano con variables: sistema visual inspirado en la señalética del Subte de Buenos Aires |
+| Tipografía | Archivo (Omnibus-Type, Buenos Aires), variable en ancho y peso, vía `next/font` |
 | Deploy | Render (Static Site, definido en `render.yaml`) |
 
 ## Características
 
-- Secciones: Hero, Sobre mí, Proyectos y Contacto, con navbar fija y menú mobile.
+- Secciones: Hero, Sobre mí, Proyectos y Contacto.
+- Navbar como diagrama de recorrido: cada sección es una estación y se marca la actual al hacer scroll.
+- Cada proyecto es una "línea" con su color (A, B, C, D), como en los carteles del Subte.
 - HTML semántico (`header`, `nav`, `main`, `section`, `footer`) y un único `h1`.
 - Accesibilidad: link para saltar al contenido, foco visible, navegación completa con teclado, `aria-*` en el menú y el formulario.
 - Responsive en 360px, 768px y 1280px, sin scroll horizontal.

@@ -4,7 +4,6 @@ export const profile = {
   role: "Desarrollador Full Stack",
   tagline:
     "Construyo productos web de punta a punta: desde la base de datos hasta la última interacción de la interfaz, con foco en que funcionen en producción.",
-  studies: "Estudiante en la UAI",
   email: "scopettaagostino@gmail.com",
   githubUrl: "https://github.com/Scopee1",
   githubHandle: "Scopee1",
@@ -50,7 +49,11 @@ export type ProjectLink = {
   href: string;
 };
 
+export type SubwayLine = "A" | "B" | "C" | "D";
+
 export type Project = {
+  slug: string;
+  line: SubwayLine;
   title: string;
   kind: string;
   description: string;
@@ -60,6 +63,8 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "mentora",
+    line: "A",
     title: "Mentora",
     kind: "Producto en producción",
     description:
@@ -68,6 +73,8 @@ export const projects: Project[] = [
     links: [{ label: "Ver sitio", href: "https://mentora.com.ar" }],
   },
   {
+    slug: "futbolle",
+    line: "B",
     title: "Futbolle",
     kind: "Proyecto final · Desarrollo y Arquitecturas Web",
     description:
@@ -79,6 +86,8 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "portfolio",
+    line: "C",
     title: "Este portfolio",
     kind: "Trabajo práctico",
     description:
@@ -87,6 +96,8 @@ export const projects: Project[] = [
     links: [{ label: "Código", href: "https://github.com/Scopee1/portfolio" }],
   },
   {
+    slug: "practicas-daw",
+    line: "D",
     title: "Prácticas de DAW",
     kind: "Ejercicios de cursada",
     description:
@@ -97,6 +108,7 @@ export const projects: Project[] = [
 ];
 
 export const navigationLinks = [
+  { label: "Inicio", href: "#inicio" },
   { label: "Sobre mí", href: "#sobre-mi" },
   { label: "Proyectos", href: "#proyectos" },
   { label: "Contacto", href: "#contacto" },

@@ -3,9 +3,9 @@ import { SectionHeading } from "./SectionHeading";
 
 export function About() {
   return (
-    <section id="sobre-mi" className="section reveal" aria-labelledby="sobre-mi-title">
+    <section id="sobre-mi" className="section" aria-labelledby="sobre-mi-title">
       <div className="container split">
-        <SectionHeading id="sobre-mi-title" index="01" title="Sobre mí" />
+        <SectionHeading id="sobre-mi-title" title="Sobre mí" />
         <div className="split__body">
           <div className="prose">
             {biography.map((paragraph) => (
@@ -16,11 +16,9 @@ export function About() {
             {skillGroups.map((group) => (
               <div key={group.title} className="skills__group">
                 <h3 className="skills__title">{group.title}</h3>
-                <ul className="tag-list">
+                <ul className="skills__list">
                   {group.skills.map((skill) => (
-                    <li key={skill} className="tag">
-                      {skill}
-                    </li>
+                    <li key={skill}>{skill}</li>
                   ))}
                 </ul>
               </div>

@@ -2,10 +2,36 @@
 
 import { useEffect, useState } from "react";
 import { navigationLinks, profile } from "@/content/profile";
+import { CloseIcon, MenuIcon } from "./Icons";
 import { ThemeToggle } from "./ThemeToggle";
+
+const SECTION_IDS = navigationLinks.map((link) => link.href.slice(1));
+const ACTIVE_BAND_MARGIN = "-45% 0px -50% 0px";
+
+function useActiveSection() {
+  const [activeSectionId, setActiveSectionId] = useState(SECTION_IDS[0]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries.find((entry) => entry.isIntersecting);
+        if (visibleEntry) setActiveSectionId(visibleEntry.target.id);
+      },
+      { rootMargin: ACTIVE_BAND_MARGIN },
+    );
+    SECTION_IDS.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  return activeSectionId;
+}
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const activeSectionId = useActiveSection();
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -21,23 +47,33 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="site-header__inner">
-        <a className="brand" href="#inicio" onClick={closeMenu} aria-label={`${profile.fullName}, volver al inicio`}>
+        <a className="brand" href="#inicio" onClick={closeMenu}>
           <span className="brand__mark" aria-hidden="true">
             {profile.initials}
           </span>
           <span className="brand__name">{profile.fullName}</span>
+          <span className="visually-hidden">, volver al inicio</span>
         </a>
 
-        <nav className="site-nav" aria-label="Principal">
-          <ul id="menu-principal" className="site-nav__list" data-open={isMenuOpen}>
-            {navigationLinks.map((link) => (
-              <li key={link.href}>
-                <a className="site-nav__link" href={link.href} onClick={closeMenu}>
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+        <nav className="route" aria-label="Principal">
+          <ol id="menu-principal" className="route__stations" data-open={isMenuOpen}>
+            {navigationLinks.map((link) => {
+              const isCurrent = link.href === `#${activeSectionId}`;
+              return (
+                <li key={link.href} className="route__station">
+                  <a
+                    className="route__link"
+                    href={link.href}
+                    onClick={closeMenu}
+                    aria-current={isCurrent ? "location" : undefined}
+                  >
+                    <span className="route__dot" aria-hidden="true" />
+                    <span className="route__label">{link.label}</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ol>
         </nav>
 
         <div className="site-header__actions">
@@ -50,13 +86,7 @@ export function SiteHeader() {
             onClick={() => setIsMenuOpen((open) => !open)}
           >
             <span className="visually-hidden">{isMenuOpen ? "Cerrar menú" : "Abrir menú"}</span>
-            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-              {isMenuOpen ? (
-                <path d="M6 6l12 12M18 6L6 18" />
-              ) : (
-                <path d="M4 8h16M4 16h16" />
-              )}
-            </svg>
+            {isMenuOpen ? <CloseIcon size={20} /> : <MenuIcon size={20} />}
           </button>
         </div>
       </div>

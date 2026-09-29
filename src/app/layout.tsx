@@ -1,23 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Archivo } from "next/font/google";
 import { profile } from "@/content/profile";
 import "./globals.css";
 
-const bodyFont = Geist({
-  variable: "--font-body",
+const signageFont = Archivo({
+  variable: "--font-signage",
   subsets: ["latin"],
-});
-
-const monoFont = Geist_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-});
-
-const displayFont = Instrument_Serif({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
+  axes: ["wdth"],
 });
 
 export const metadata: Metadata = {
@@ -34,8 +23,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4f1ea" },
-    { media: "(prefers-color-scheme: dark)", color: "#151412" },
+    { media: "(prefers-color-scheme: light)", color: "#141517" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
 };
 
@@ -46,7 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
-      className={`${bodyFont.variable} ${monoFont.variable} ${displayFont.variable}`}
+      className={signageFont.variable}
       suppressHydrationWarning
     >
       <head>

@@ -1,5 +1,6 @@
 import { profile } from "@/content/profile";
 import { ContactForm } from "./ContactForm";
+import { ArrowUpRightIcon } from "./Icons";
 import { SectionHeading } from "./SectionHeading";
 
 const contactChannels = [
@@ -10,9 +11,9 @@ const contactChannels = [
 
 export function Contact() {
   return (
-    <section id="contacto" className="section reveal" aria-labelledby="contacto-title">
+    <section id="contacto" className="section section--terminal" aria-labelledby="contacto-title">
       <div className="container split">
-        <SectionHeading id="contacto-title" index="03" title="Contacto" />
+        <SectionHeading id="contacto-title" title="Contacto" />
         <div className="split__body contact">
           <div>
             <p className="contact__lead">
@@ -28,8 +29,8 @@ export function Contact() {
                   >
                     <span className="channel__label">{channel.label}</span>
                     <span className="channel__value">{channel.value}</span>
-                    <span className="channel__arrow" aria-hidden="true">
-                      ↗
+                    <span className="channel__arrow">
+                      <ArrowUpRightIcon />
                     </span>
                   </a>
                 </li>

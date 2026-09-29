@@ -1,49 +1,44 @@
 import { projects } from "@/content/profile";
+import { ArrowUpRightIcon } from "./Icons";
+import { LineBadge } from "./LineBadge";
 import { SectionHeading } from "./SectionHeading";
-
-function formatIndex(position: number) {
-  return String(position + 1).padStart(2, "0");
-}
 
 export function Projects() {
   return (
-    <section id="proyectos" className="section reveal" aria-labelledby="proyectos-title">
+    <section id="proyectos" className="section" aria-labelledby="proyectos-title">
       <div className="container split">
-        <SectionHeading id="proyectos-title" index="02" title="Proyectos" />
-        <ol className="project-list split__body">
-          {projects.map((project, position) => (
-            <li key={project.title} className="project" data-featured={position === 0}>
-              <article aria-labelledby={`proyecto-${position}`}>
-                <div className="project__meta">
-                  <span className="project__number" aria-hidden="true">
-                    {formatIndex(position)}
-                  </span>
-                  <span className="project__kind">{project.kind}</span>
+        <SectionHeading id="proyectos-title" title="Proyectos" />
+        <ul className="project-list split__body">
+          {projects.map((project) => (
+            <li key={project.slug} id={`proyecto-${project.slug}`} className="project" data-line={project.line}>
+              <article aria-labelledby={`proyecto-${project.slug}-title`}>
+                <div className="project__header">
+                  <LineBadge line={project.line} size="large" />
+                  <div>
+                    <h3 id={`proyecto-${project.slug}-title`} className="project__title">
+                      {project.title}
+                    </h3>
+                    <p className="project__kind">{project.kind}</p>
+                  </div>
                 </div>
-                <h3 id={`proyecto-${position}`} className="project__title">
-                  {project.title}
-                </h3>
                 <p className="project__description">{project.description}</p>
-                <ul className="tag-list" aria-label={`Tecnologías de ${project.title}`}>
-                  {project.technologies.map((technology) => (
-                    <li key={technology} className="tag tag--quiet">
-                      {technology}
-                    </li>
-                  ))}
-                </ul>
+                <p className="project__stack">
+                  <span className="visually-hidden">Tecnologías: </span>
+                  {project.technologies.join(" · ")}
+                </p>
                 <div className="project__links">
                   {project.links.map((link) => (
-                    <a key={link.href} className="text-link" href={link.href} target="_blank" rel="noopener noreferrer">
+                    <a key={link.href} className="project__link" href={link.href} target="_blank" rel="noopener noreferrer">
                       {link.label}
                       <span className="visually-hidden"> de {project.title} (abre en una pestaña nueva)</span>
-                      <span aria-hidden="true"> ↗</span>
+                      <ArrowUpRightIcon size={16} />
                     </a>
                   ))}
                 </div>
               </article>
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </section>
   );

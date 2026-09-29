@@ -9,7 +9,7 @@ export function SiteFooter() {
         </p>
         <p>
           Hecho con Next.js ·{" "}
-          <a className="text-link" href={profile.repositoryUrl} target="_blank" rel="noopener noreferrer">
+          <a className="site-footer__link" href={profile.repositoryUrl} target="_blank" rel="noopener noreferrer">
             Ver el código
           </a>
         </p>
